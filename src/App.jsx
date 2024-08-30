@@ -1,7 +1,8 @@
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import HomeIcon from "@mui/icons-material/Home";
-import { pink } from "@mui/material/colors";
+import pink from "@mui/material/colors/pink";
+import TabIndicator from '@mui/material/Tabs';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <AccessAlarmIcon />
       <br />
       <HomeIcon sx={{ color: pink[100] }} />
+      <TabIndicator/>
     </>
   );
 }
