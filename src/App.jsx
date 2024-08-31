@@ -1,21 +1,17 @@
-import Button from "@mui/material/Button";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import HomeIcon from "@mui/icons-material/Home";
-import { pink } from "@mui/material/colors";
 import {
+  Container,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
-  Typography,
   useColorScheme,
+  Box,
 } from "@mui/material";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 
 function ModeSelect() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { mode, setMode } = useColorScheme();
 
   const handleChange = (event) => {
@@ -57,25 +53,42 @@ function ModeSelect() {
 
 function App() {
   return (
-    <>
-      <ModeSelect />
-      <hr />
-      <div>Tri Dung</div>
-
-      <Typography variant="h6">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta,
-        blanditiis accusantium temporibus dolor quas ullam id quia laborum
-        delectus iste voluptate nostrum consequuntur vitae possimus. Qui
-        dignissimos similique esse natus!
-      </Typography>
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-      <br />
-      <AccessAlarmIcon />
-      <br />
-      <HomeIcon sx={{ color: pink[100] }} />
-    </>
+    <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
+      <Box
+        sx={{
+          backgroundColor: "primary.light",
+          width: "100%",
+          height: ({ trello }) => trello.appBarHeight,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <ModeSelect />
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: "primary.dark",
+          width: "100%",
+          height: ({ trello }) => trello.boardBarHeight,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Board Bar
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: "primary.main",
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          height: ({ trello }) =>
+            `calc(100vh - ${trello.appBarHeight} - ${trello.boardBarHeight})`,
+        }}
+      >
+        Board Content
+      </Box>
+    </Container>
   );
 }
 
