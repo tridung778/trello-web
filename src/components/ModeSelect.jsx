@@ -1,4 +1,5 @@
 import {
+  Box,
   FormControl,
   InputLabel,
   MenuItem,
@@ -17,7 +18,7 @@ const ModeSelect = () => {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+    <FormControl size="small">
       <InputLabel id="demo-select-small-label">Mode</InputLabel>
       <Select
         labelId="demo-select-small-label"
@@ -27,22 +28,22 @@ const ModeSelect = () => {
         onChange={handleChange}
       >
         <MenuItem value={"light"}>
-          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <LightModeIcon fontSize="small" />
             Light
-          </div>
+          </Box>
         </MenuItem>
         <MenuItem value={"dark"}>
-          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <DarkModeIcon fontSize="small" />
             Dark
-          </div>
+          </Box>
         </MenuItem>
         <MenuItem value={"system"}>
-          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <SettingsBrightnessIcon fontSize="small" />
             System
-          </div>
+          </Box>
         </MenuItem>
       </Select>
     </FormControl>

@@ -78,7 +78,7 @@ const AppBar = () => {
         <Tooltip title="Help">
           <HelpOutlineIcon sx={{ cursor: "pointer" }} />
         </Tooltip>
-       < Profile/>
+        <Profile />
       </Box>
     </Box>
   );
