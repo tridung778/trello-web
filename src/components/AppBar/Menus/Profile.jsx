@@ -38,7 +38,7 @@ const Profile = () => {
         sx={{}}
       >
         <Avatar
-          sx={{ width: 30, height: 30 }}
+          sx={{ width: 34, height: 34 }}
           alt="Remy Sharp"
           src="https://mui.com/static/images/avatar/1.jpg"
         />
