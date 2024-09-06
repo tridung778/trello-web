@@ -35,6 +35,7 @@ const Workspaces = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        sx={{ color: "white" }}
         endIcon={<ExpandMore />}
       >
         Workspaces

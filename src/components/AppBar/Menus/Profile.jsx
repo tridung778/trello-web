@@ -35,10 +35,9 @@ const Profile = () => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{}}
       >
         <Avatar
-          sx={{ width: 34, height: 34 }}
+          sx={{ width: 36, height: 36 }}
           alt="Remy Sharp"
           src="https://mui.com/static/images/avatar/1.jpg"
         />

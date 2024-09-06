@@ -9,13 +9,13 @@ import AvatarGroup from "@mui/material/AvatarGroup";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const MENU_STYLES = {
-  color: "primary.main",
-  bgcolor: "white",
+  color: "white",
+  bgcolor: "transparent",
   border: "none",
   paddingX: "5px",
   borderRadius: "4px",
   "& .MuiSvgIcon-root": {
-    color: "primary.main",
+    color: "white",
   },
   "&:hover": {
     bgcolor: "primary.50",
@@ -24,7 +24,6 @@ const MENU_STYLES = {
 const BoardBar = () => {
   return (
     <Box
-      px={2}
       sx={{
         width: "100%",
         height: ({ trello }) => trello.appBarHeight,
@@ -34,7 +33,10 @@ const BoardBar = () => {
         color: "primary.main",
         gap: 2,
         overflowX: "auto",
-        borderTop: "1px solid #00bfa5",
+        borderBottom: "1px solid white",
+        paddingX: 2,
+        bgcolor: (theme) =>
+          theme.palette.mode === "dark" ? "#34495e" : "#1976d2",
       }}
     >
       <Box
@@ -53,7 +55,7 @@ const BoardBar = () => {
         <Chip
           sx={MENU_STYLES}
           icon={<VpnLockIcon />}
-          label="Public/private Workspace"
+          label="Public/Private Workspace"
           onClick={() => {}}
         />
         <Chip
@@ -83,16 +85,26 @@ const BoardBar = () => {
           gap: 2,
         }}
       >
-        <Button variant="outlined" startIcon={<PersonAddIcon />}>
+        <Button
+          variant="outlined"
+          sx={{
+            color: "white",
+            borderColor: "white",
+            "&:hover": { borderColor: "white" },
+          }}
+          startIcon={<PersonAddIcon />}
+        >
           Invite
         </Button>
         <AvatarGroup
           max={7}
           sx={{
+            gap: "10px",
             "& .MuiAvatar-root": {
-              width: "34px",
-              height: "34px",
-              fontSize: "16px",
+              width: 36,
+              height: 36,
+              fontSize: 16,
+              border: "none",
             },
           }}
         >
