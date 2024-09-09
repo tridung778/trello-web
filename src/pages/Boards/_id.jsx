@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
-import BoardBar from "./BoardBar";
-import BoradContent from "./BoradContent";
+import BoardBar from "./BoardContent/BoardBar/BoardBar";
+import BoradContent from "./BoardContent/BoardContent";
 import AppBar from "~/components/AppBar/AppBar";
 
 const Board = () => {
