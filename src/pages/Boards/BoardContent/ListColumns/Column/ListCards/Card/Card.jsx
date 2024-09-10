@@ -10,8 +10,26 @@ import CommentIcon from "@mui/icons-material/Comment";
 import GroupIcon from "@mui/icons-material/Group";
 import AttachmentIcon from "@mui/icons-material/Attachment";
 import { Card as MuiCard } from "@mui/material";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const Card = ({ card }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: card._id, data: { ...card } });
+
+  const dndKitCardStyles = {
+    // touchAction: "none",
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined,
+  };
+
   const shouldCardAcction = () => {
     return (
       !!card?.memberIds?.length ||
@@ -22,6 +40,10 @@ const Card = ({ card }) => {
 
   return (
     <MuiCard
+      ref={setNodeRef}
+      style={dndKitCardStyles}
+      {...attributes}
+      {...listeners}
       sx={{
         cursor: "pointer",
         boxShadow: "0 1px 1px rgba(0, 0, 0, 0.2)",
