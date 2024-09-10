@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { Box, Button } from "@mui/material";
 import Column from "./Column/Column";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 
-const ListColumns = () => {
+const ListColumns = ({ columns }) => {
   return (
     <Box
       sx={{
@@ -14,8 +15,9 @@ const ListColumns = () => {
         overflowY: "hidden",
       }}
     >
-      <Column />
-      <Column />
+      {columns?.map((column) => (
+        <Column key={column._id} column={column}/>
+      ))}
       <Box
         sx={{
           minWidth: "200px",

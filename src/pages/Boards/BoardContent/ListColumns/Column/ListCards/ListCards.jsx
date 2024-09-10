@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { Box } from "@mui/material";
 import Card from "./Card/Card";
 
-const ListCards = () => {
+const ListCards = ({ cards }) => {
   return (
     <Box
       sx={{
@@ -25,8 +26,9 @@ const ListCards = () => {
         },
       }}
     >
-      <Card />
-      <Card hideMedia />
+      {cards?.map((card) => (
+        <Card key={card._id} card={card} />
+      ))}
     </Box>
   );
 };

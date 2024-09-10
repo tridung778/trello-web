@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
 import { Box } from "@mui/material";
 import ListColumns from "./ListColumns/ListColumns";
-const BoardContent = () => {
+import { mapOrder } from "~/utils/sorts";
+const BoardContent = ({ board }) => {
+  const orderedColumns = mapOrder(board?.columns, board?.columnOrderIds, "_id");
   return (
     <Box
       sx={{
@@ -11,7 +14,7 @@ const BoardContent = () => {
         p: "10px 0",
       }}
     >
-      <ListColumns />
+      <ListColumns columns={orderedColumns} />
     </Box>
   );
 };

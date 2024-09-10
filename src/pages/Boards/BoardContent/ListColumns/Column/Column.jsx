@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   ContentCopy,
   ContentCut,
@@ -22,8 +23,9 @@ import DragHandleIcon from "@mui/icons-material/DragHandle";
 
 import { useState } from "react";
 import ListCards from "./ListCards/ListCards";
+import { mapOrder } from "~/utils/sorts";
 
-const Column = () => {
+const Column = ({ column }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -32,6 +34,8 @@ const Column = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, "_id");
 
   return (
     <Box
@@ -64,7 +68,7 @@ const Column = () => {
             cursor: "pointer",
           }}
         >
-          Column Title
+          {column?.title}
         </Typography>
         <Box>
           <Box>
@@ -135,7 +139,7 @@ const Column = () => {
         </Box>
       </Box>
 
-      <ListCards />
+      <ListCards cards={orderedCards} />
 
       <Box
         sx={{

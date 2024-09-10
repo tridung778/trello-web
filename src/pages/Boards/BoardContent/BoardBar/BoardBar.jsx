@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Box, Button, Chip, Tooltip } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import VpnLockIcon from "@mui/icons-material/VpnLock";
@@ -7,6 +8,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { capitalizeFirstLetter } from "~/utils/formatters";
 
 const MENU_STYLES = {
   color: "white",
@@ -21,7 +23,7 @@ const MENU_STYLES = {
     bgcolor: "primary.50",
   },
 };
-const BoardBar = () => {
+const BoardBar = ({ board }) => {
   return (
     <Box
       sx={{
@@ -48,13 +50,13 @@ const BoardBar = () => {
         <Chip
           sx={MENU_STYLES}
           icon={<DashboardIcon />}
-          label="MERN Stack Trello"
+          label={board?.title}
           onClick={() => {}}
         />
         <Chip
           sx={MENU_STYLES}
           icon={<VpnLockIcon />}
-          label="Public/Private Workspace"
+          label={capitalizeFirstLetter(board?.type)}
           onClick={() => {}}
         />
         <Chip
