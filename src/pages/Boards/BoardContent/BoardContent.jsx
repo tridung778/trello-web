@@ -12,9 +12,7 @@ import {
   defaultDropAnimationSideEffects,
   closestCorners,
   pointerWithin,
-  rectIntersection,
   getFirstCollision,
-  closestCenter,
 } from "@dnd-kit/core";
 import { useEffect, useRef, useState } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
@@ -272,19 +270,21 @@ const BoardContent = ({ board }) => {
       }
 
       const pointerIntersections = pointerWithin(args);
-      // eslint-disable-next-line no-extra-boolean-cast
-      const intersections = !!pointerIntersections?.length
-        ? pointerIntersections
-        : rectIntersection(args);
 
-      let overId = getFirstCollision(intersections, "id");
+      if(!pointerIntersections?.length) return 
+      // eslint-disable-next-line no-extra-boolean-cast
+      // const intersections = !!pointerIntersections?.length
+      //   ? pointerIntersections
+      //   : rectIntersection(args);
+
+      let overId = getFirstCollision(pointerIntersections, "id");
 
       if (overId) {
         const intersectColumn = orderedColumns.find(
           (column) => column._id === overId
         );
         if (intersectColumn) {
-          overId = closestCenter({
+          overId = closestCorners({
             ...args,
             droppableContainers: args.droppableContainers.filter(
               (container) =>
