@@ -18,8 +18,9 @@ import { useEffect, useRef, useState } from "react";
 import { arrayMove } from "@dnd-kit/sortable";
 import Column from "./ListColumns/Column/Column";
 import Card from "./ListColumns/Column/ListCards/Card/Card";
-import { cloneDeep } from "lodash";
+import { cloneDeep, isEmpty } from "lodash";
 import { useCallback } from "react";
+import { generatePlaholderCard } from "~/utils/formatters";
 
 const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: "ACTIVE_DRAG_ITEM_TYPE_COLUMN",
@@ -100,6 +101,10 @@ const BoardContent = ({ board }) => {
           (card) => card._id !== activeDraggingCardId
         );
 
+        if (isEmpty(nextActiveColumn.cards)) {
+          nextActiveColumn.cards = [generatePlaholderCard(nextActiveColumn)];
+        }
+
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(
           (card) => card._id
         );
@@ -119,6 +124,10 @@ const BoardContent = ({ board }) => {
           newCardIndex,
           0,
           rebuild_activeDraggingCardData
+        );
+
+        nextOverColumn.cards = nextOverColumn.cards.filter(
+          (card) => !card.FE_PlaceholderCard
         );
 
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map(
@@ -271,8 +280,7 @@ const BoardContent = ({ board }) => {
 
       const pointerIntersections = pointerWithin(args);
 
-      if(!pointerIntersections?.length) return 
-      // eslint-disable-next-line no-extra-boolean-cast
+      if (!pointerIntersections?.length) return;
       // const intersections = !!pointerIntersections?.length
       //   ? pointerIntersections
       //   : rectIntersection(args);
