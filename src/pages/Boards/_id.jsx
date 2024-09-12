@@ -8,7 +8,7 @@ import { fetctBoardDetailsAPI } from "~/apis";
 const Board = () => {
   const [board, setBoard] = useState(null);
   useEffect(() => {
-    const boardId = "66e27712385edd3fd4e3fee5";
+    const boardId = "66e294cc9e91753f88c54893";
 
     fetctBoardDetailsAPI(boardId).then((board) => {
       setBoard(board);
@@ -25,3 +25,6 @@ const Board = () => {
 };
 
 export default Board;
+// boardId: 66e294cc9e91753f88c54893
+// columnId: 66e296ceaf437ddd63ca8f97
+// columnId: 66e297b4af437ddd63ca8f99
