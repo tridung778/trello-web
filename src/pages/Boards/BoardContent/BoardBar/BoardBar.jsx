@@ -76,7 +76,7 @@ const BoardBar = ({ board }) => {
         <Chip
           sx={MENU_STYLES}
           icon={<FilterListIcon />}
-          label="Automation"
+          label="Filters"
           onClick={() => {}}
         />
       </Box>

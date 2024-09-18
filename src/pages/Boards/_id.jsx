@@ -8,6 +8,8 @@ import {
   createNewCardAPI,
 } from "~/apis";
 import BoardContent from "./BoardContent/BoardContent";
+import { isEmpty } from "lodash";
+import { generatePlaholderCard } from "~/utils/formatters";
 
 const Board = () => {
   const [board, setBoard] = useState(null);
@@ -15,16 +17,29 @@ const Board = () => {
     const boardId = "66e2bbd24e38acea4241074f";
 
     fetctBoardDetailsAPI(boardId).then((board) => {
+      board.columns.forEach((column) => {
+        if (isEmpty(column.cards)) {
+          column.cards = [generatePlaholderCard(column)];
+          column.cardOrderIds = [generatePlaholderCard(column)._id];
+        }
+      });
       setBoard(board);
     });
-  }, [board]);
+  }, []);
 
   const createNewColumn = async (newColumnData) => {
     const createdColumn = await createNewColumnAPI({
       ...newColumnData,
       boardId: board._id,
     });
-    console.log(createdColumn);
+
+    createdColumn.cards = [generatePlaholderCard(createdColumn)];
+    createdColumn.cardOrderIds = [generatePlaholderCard(createdColumn)._id];
+
+    const newBoard = { ...board };
+    newBoard.columns.push(createdColumn);
+    newBoard.columnOrderIds.push(createdColumn._id);
+    setBoard(newBoard);
   };
 
   const createNewCard = async (newCardData) => {
@@ -32,7 +47,15 @@ const Board = () => {
       ...newCardData,
       boardId: board._id,
     });
-    console.log(createdCard);
+    const newBoard = { ...board };
+    const columnToUpdate = newBoard.columns.find(
+      (column) => column._id === createdCard.columnId
+    );
+    if (columnToUpdate) {
+      columnToUpdate.cards.push(createdCard);
+      columnToUpdate.cardOrderIds.push(createdCard._id);
+      setBoard(newBoard);
+    }
   };
 
   return (
