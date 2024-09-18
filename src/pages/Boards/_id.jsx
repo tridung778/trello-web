@@ -1,9 +1,13 @@
 import { Container } from "@mui/material";
 import BoardBar from "./BoardContent/BoardBar/BoardBar";
-import BoradContent from "./BoardContent/BoardContent";
 import AppBar from "~/components/AppBar/AppBar";
 import { useEffect, useState } from "react";
-import { fetctBoardDetailsAPI } from "~/apis";
+import {
+  fetctBoardDetailsAPI,
+  createNewColumnAPI,
+  createNewCardAPI,
+} from "~/apis";
+import BoardContent from "./BoardContent/BoardContent";
 
 const Board = () => {
   const [board, setBoard] = useState(null);
@@ -13,13 +17,33 @@ const Board = () => {
     fetctBoardDetailsAPI(boardId).then((board) => {
       setBoard(board);
     });
-  }, []);
+  }, [board]);
+
+  const createNewColumn = async (newColumnData) => {
+    const createdColumn = await createNewColumnAPI({
+      ...newColumnData,
+      boardId: board._id,
+    });
+    console.log(createdColumn);
+  };
+
+  const createNewCard = async (newCardData) => {
+    const createdCard = await createNewCardAPI({
+      ...newCardData,
+      boardId: board._id,
+    });
+    console.log(createdCard);
+  };
 
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <AppBar />
       <BoardBar board={board} />
-      <BoradContent board={board} />
+      <BoardContent
+        board={board}
+        createNewColumn={createNewColumn}
+        createNewCard={createNewCard}
+      />
     </Container>
   );
 };

@@ -30,7 +30,7 @@ import { CSS } from "@dnd-kit/utilities";
 import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
 
-const Column = ({ column }) => {
+const Column = ({ column, createNewCard }) => {
   const {
     attributes,
     listeners,
@@ -66,11 +66,18 @@ const Column = ({ column }) => {
   const toggleOpenNewCardForm = () => {
     setOpenNewCardForm(!openNewCardForm);
   };
-  const addNewCard = () => {
+  const addNewCard = async () => {
     if (!newCardTitle) {
       toast.error("Please enter card Title!");
       return;
     }
+
+    const newCardData = {
+      title: newCardTitle,
+      columnId: column._id,
+    };
+
+    await createNewCard(newCardData);
     toggleOpenNewCardForm();
     setNewCardTitle("");
   };

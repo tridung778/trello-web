@@ -10,7 +10,7 @@ import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-toastify";
 
-const ListColumns = ({ columns }) => {
+const ListColumns = ({ columns, createNewColumn, createNewCard }) => {
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false);
 
   const [newColumnTitle, setNewColumnTitle] = useState("");
@@ -18,11 +18,18 @@ const ListColumns = ({ columns }) => {
   const toggleOpenNewColumnForm = () => {
     setOpenNewColumnForm(!openNewColumnForm);
   };
-  const addNewColumns = () => {
+  const addNewColumns = async () => {
     if (!newColumnTitle) {
       toast.error("Please enter column Title!");
       return;
     }
+
+    const newColumnData = {
+      title: newColumnTitle,
+    };
+
+    await createNewColumn(newColumnData);
+
     toggleOpenNewColumnForm();
     setNewColumnTitle("");
   };
@@ -42,7 +49,11 @@ const ListColumns = ({ columns }) => {
         }}
       >
         {columns?.map((column) => (
-          <Column key={column._id} column={column} />
+          <Column
+            key={column._id}
+            column={column}
+            createNewCard={createNewCard}
+          />
         ))}
         {!openNewColumnForm ? (
           <Box
