@@ -8,7 +8,7 @@ import { fetctBoardDetailsAPI } from "~/apis";
 const Board = () => {
   const [board, setBoard] = useState(null);
   useEffect(() => {
-    const boardId = "66e294cc9e91753f88c54893";
+    const boardId = "66e2bbd24e38acea4241074f";
 
     fetctBoardDetailsAPI(boardId).then((board) => {
       setBoard(board);
