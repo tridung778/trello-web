@@ -6,6 +6,7 @@ import {
   fetctBoardDetailsAPI,
   createNewColumnAPI,
   createNewCardAPI,
+  updateBoardDetailsAPI,
 } from "~/apis";
 import BoardContent from "./BoardContent/BoardContent";
 import { isEmpty } from "lodash";
@@ -58,6 +59,19 @@ const Board = () => {
     }
   };
 
+  const moveColumns = async (dndOrderedColumns) => {
+    const dndOrderedColumnsIds = dndOrderedColumns.map((c) => c._id);
+
+    const newBoard = { ...board };
+    newBoard.columns = dndOrderedColumns;
+    newBoard.columnOrderIds = dndOrderedColumnsIds;
+    setBoard(newBoard);
+
+    await updateBoardDetailsAPI(board._id, {
+      columnOrderIds: newBoard.columnOrderIds,
+    });
+  };
+
   return (
     <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
       <AppBar />
@@ -66,6 +80,7 @@ const Board = () => {
         board={board}
         createNewColumn={createNewColumn}
         createNewCard={createNewCard}
+        moveColumns={moveColumns}
       />
     </Container>
   );
