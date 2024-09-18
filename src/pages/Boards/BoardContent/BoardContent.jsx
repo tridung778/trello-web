@@ -22,6 +22,7 @@ import { cloneDeep, isEmpty } from "lodash";
 import { useCallback } from "react";
 import { generatePlaholderCard } from "~/utils/formatters";
 import { MouseSensor, TouchSensor } from "~/customLibraries/DndKitSensors";
+// import TestCop from "../TestCop";
 
 const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: "ACTIVE_DRAG_ITEM_TYPE_COLUMN",
@@ -319,6 +320,7 @@ const BoardContent = ({ board }) => {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
+      {/* <TestCop /> */}
       <Box
         sx={{
           width: "100%",
